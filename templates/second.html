@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>catherine_is_awesome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="border2">
+        <div class="title">
+            Have you ever been worried you or a loved one had an illness or condition after testing positive for it?
+        </div>
+        <div>
+            <p>
+                Given the recent COVID-19 pandemic, that is probably not a super-rare-event. The following calculator tells you the actual probability your or a loved one has some condition (or illness) given a positive test result. Simply enter the prior probability of the condition occuring; this is usually the percentage of population who have the condition. Also enter the true positive rate of the test, otherwise known as the probability the test would return a positive result when someone actually has the condition. Lastly, enter the false positive rate of the test, otherwise known as the probability the test would return a positive result when someone doesn't have the condition. 
+            </p>
+        </div>
+    </div>
+    <div class="border2">
+        <h2>The "How worried should I be?" Calculator</h2>
+        <h4>Please enter all probabilities as decimals, not percentages. To change a percentage into a decimal, divide by 100!</h1>
+        <form id="addForm">
+            <label for="num1">Enter the prior probability of the condition:</label>
+            <input id="num1" name="num1">
+            <br><br>
+            <label for="num2">Enter the true positive rate of the test:</label>
+            <input id="num2" name="num2">
+            <br><br>
+            <label for="num3">Enter the false positive rate of the test:</label>
+            <input id="num3" name="num3">
+            <br><br>
+            <input type="button" value="Calculate" onclick="addNumbers()">
+        </form>
+    </div>
+
+    <p id="result"></p>
+
+    <script>
+        function addNumbers() {
+            // Get the values from the input fields
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var num3 = parseFloat(document.getElementById('num3').value);
+
+            // Check if the input is valid
+            if (isNaN(num1) || isNaN(num2) || isNaN(num2)) {
+                document.getElementById('result').innerText = "Please enter valid numbers.";
+                return;
+            }
+
+            // Perform addition
+            var sum = (num2 * num1) / (num2 * num1 + num3 * (1 - num1));
+            // var sum = num2 + num1;
+            // Display the result
+            document.getElementById('result').innerText = "The probability you actually have this condition given a positive test result is: " + sum.toFixed(2);
+        }
+    </script>
+    <div class="border2">
+        <div class="title">
+            Play around with the calculator. Are you surprised? 
+        </div>
+        <div>
+            <p>The problem posed on the home page is known as the “mammography problem” and is another classical problem used to demonstrate base rate neglect. Before diving into how the “mammography problem” connects to base rate neglect, let’s first use Bayes’ theorem to find the probability the woman actually has breast cancer and see if the answer surprises us. </p>
+            <p>Bayes’ theorem is one of the most important theorems in statistics. Written mathematically, Bayes’ theorem states: </p>
+            <p class="center">\(P(H|D) = \frac{P(D|H) * P(H)}{P(D)}\)</p>
+            <p>where \(H\) stands for a hypothesis and \(D\) stands for data. \(P(H|D)\) is called the posterior, \(P(D|H)\) the likelihood, \(P(H)\) the prior, and \(P(D)\) the evidence. In the problem above, the hypothesis is that the woman has breast cancer and the data is the positive mammography. We are trying to calculate \(P(H|D)\), or the probability she has cancer given a positive mammography. \(P(D|H)\) is therefore the probability there was a positive mammography given that she has breast cancer, otherwise known as the <b>true positive rate</b>. This is given to be \(80\%\). \(P(H)\) is the prior probability the woman has cancer, irrespective of mammography results, which is given to be \(1\%\). \(P(D)\) is the probability of a positive mammography and is more difficult to find.</p> 
+            <p>We can find the probability of a positive mammography by breaking it down: the probability a woman receives a positive mammography depends on whether or not she actually has breast cancer. In other words, the probability a woman receives a positive mammography is the probability she receives a positive mammography and has breast cancer  plus the probability she receives a positive mammography and doesn’t have breast cancer:
+                <p>\(P(D) = P(D \text{ and breast cancer}) + P(D \text{ and no breast cancer})\)</p>
+                
+                </p> \(\hspace{1.38cm} = P(D|\text{breast cancer}) * P(\text{breast cancer}) + P(D|\text{no breast cancer}) * P(\text{no breast cancer})\)</p>
+                <p>
+                    \(\hspace{1.38cm} = \text{true positive rate} * P(\text{breast cancer}) + \text{false positive rate} * P(\text{no breast cancer})\)
+                </p>
+            
+            where the second line follows from the first by definition of conditional probability. This process of breaking down the probability of someone receiving a positive mammography into the probabilities of receiving a positive mammography depending on whether or not they actually have breast cancer is the Law of Total Probability, another important concept in probability and statistics.</p> 
+            
+            <p> Plugging in the numbers, we get that the probability a woman actually has breast cancer given a positive mammography is <p class="center">\( \frac{0.8 * 0.01}{0.8 * 0.01 + 0.096 * 0.99 } = 0.078 \)</p> In other words, there's only a 7.8% chance of cancer, even with a positive mammography.</p> 
+
+            <p>Perhaps all this talk about true/false positives and priors reminds us of Signal Detection Theory. Indeed, behind the scenes, the mammography is trying to make a decision about whether or not a person has breast cancer; this decision making process could be modeled by Signal Detection Theory in which the signal is breast cancer and there’s some noise. Depending on the threshold of the mammography, the true positive or hit rate and true negative or correct reject rate will change. 
+            </p> 
+
+            <p>Returning to the “mammography problem”, note that we were able to arrive at this value given only the prior probability of breast cancer, the true positive rate of the test, and the false positive rate of the test, so it’s no surprise these are the values asked for in the calculator. Since \(\text{true positive rate} + \text{false negative rate} = 1\) and \(\text{true negative rate} + \text{false positive rate} = 1\), we also could have asked for the false negative rate instead of the true positive rate or the true negative rate instead of the false positive rate. Therefore when you plug the prior probability of disease and the true positive and false positive rates of the test into the calculator, we are conducting the calculation outlined above.</p> 
+
+            <p>Try plugging in different values into the calculator above, specifically varying the value of the “prior probability of disease”. The probability of whether someone has a disease given a positive test result changes greatly depending on whether they belong to a “high-prevalence” or “low-prevalence” population. In general, people don’t seem to be very good at using prior probabilities and test sensitivity to determine the true probability of disease. When the “mammography problem” is posed to people, very few are able to come up with a correct solution, with most reporting numbers far larger and closer to the accuracy of the test (Barbey and Sloman 252), almost all-together ignoring that the probability of having breast cancer is very low. </p> 
+
+            <p>However, one simple change to the “mammography problem” seems to help peoples’ judgements greatly: changing the probabilities into frequencies: 
+            “10 out of every 1,000 women at age forty who participate in routine screening have breast cancer. 8 out of every 10 women with breast cancer will get a positive mammography. 95 out of every 990 women without breast cancer will also get a positive mammography. Imagine that you were presented a new representative sample of women at age 40 who got a positive mammography in routine screening. How many of these women do you expect to actually have breast cancer?” (Pennycook et al. 51)  
+            Just by changing the probabilities to frequencies seems to increase peoples’ performance by a factor of 3, from 16% to 46% (Gigerenzer and Hoffrage 693). This phenomenon of people’s weakness at reasoning and quantifying probabilities has been studied in numerous settings, including Allais’s paradox in which Allais noticed people value the transition from 97% to 100% certainty more than 61% to 64%. This led to important work theorizing, investigating, and creating the “probability weighting” function (Ullman).</p>
+
+        </div>
+    </div>
+</body>
+</html>

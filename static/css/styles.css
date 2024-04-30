@@ -1,0 +1,128 @@
+body {
+    font-family: monospace, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #333;
+    color: pink;
+    padding: 10px 0;
+    text-align: center;
+}
+nav {
+    background-color: #666;
+    color: pink;
+    text-align: center;
+    padding: 10px 0;
+}
+nav a {
+    color: pink;
+    text-decoration: none;
+    margin: 0 10px;
+}
+section {
+    padding: 20px;
+    color: black;
+    text-align: center;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 320px;
+    height: 300px; /* Adjust height as needed */
+    background-color: rgb(247, 226, 229);
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    padding: 15px;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+.box img {
+    max-width: 100%;
+    max-height: 200px; /* Adjust as needed */
+    margin-top: 0px;
+}
+
+.title {
+    margin-top: 0px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.border1 {
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 300px; 
+    margin-right: 300px;
+    margin-top: -5px;
+}
+
+.border2 {
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 300px; 
+    margin-right: 300px;
+}
+
+#result {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.box2 {
+    width: 100px;
+    height: 300px; /* Adjust height as needed */
+    background-color: rgb(247, 226, 229);
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    padding: 15px;
+}
+
+.box2:hover {
+    transform: scale(1.1);
+}
